@@ -40,4 +40,17 @@ using namespace ariel;
     void Player::increaseNumOfWonCards(){
         numOfWonCards+=2;   //adds the player's card and his opponent
     }
+
+    bool Player::getIsPlaying(){
+        return this->isPlaying;
+    }
+
+    void Player::setIsPlaying(){
+        if(isPlaying){
+            this->isPlaying = false;
+        }
+        else{
+            this->isPlaying = true;
+        }
+    }
     

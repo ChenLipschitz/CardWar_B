@@ -11,6 +11,7 @@ namespace ariel{
         // vector<Cards> wonCardsStack; //the player's won cards stack
         int numOfWonCards = 0;
         int getNumOfWinnings = 0;
+        bool isPlaying = false;
         
 
         public:
@@ -22,5 +23,7 @@ namespace ariel{
         int getNumOfWinnings();
         int getNumOfWonCards();
         void increaseNumOfWonCards();
+        bool getIsPlaying();
+        void setIsPlaying();
     };
 }
