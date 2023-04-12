@@ -26,11 +26,8 @@ using namespace ariel;
     }
 
     int Player::cardesTaken(){
-        // the amount of cards the player has won until now
-        if (wonCardsStack == NULL){
-            return 0;
-        }
-        return wonCardsStack.size();
+        // the amount of cards the player won until now
+        return this->numOfWonCards;
     }
 
     string Player::getName(){
@@ -39,6 +36,10 @@ using namespace ariel;
 
     void Player::increaseNumOfWonCards(){
         numOfWonCards+=2;   //adds the player's card and his opponent
+    }
+
+    void Player::increaseNumOfWinnings(){
+        numOfWinnings++;
     }
 
     bool Player::getIsPlaying(){

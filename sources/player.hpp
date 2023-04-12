@@ -8,9 +8,8 @@ namespace ariel{
         private:
         string name;
         vector<Cards> cardsStack;   //the player's stack
-        // vector<Cards> wonCardsStack; //the player's won cards stack
         int numOfWonCards = 0;
-        int getNumOfWinnings = 0;
+        int numOfWinnings = 0;
         bool isPlaying = false;
         
 
@@ -21,6 +20,7 @@ namespace ariel{
         int cardesTaken();  //the amount of cards the player has won
         string getName();
         int getNumOfWinnings();
+        void increaseNumOfWinnings();
         int getNumOfWonCards();
         void increaseNumOfWonCards();
         bool getIsPlaying();
