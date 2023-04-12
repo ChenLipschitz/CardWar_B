@@ -38,6 +38,10 @@ using namespace ariel;
         numOfWonCards+=2;   //adds the player's card and his opponent
     }
 
+    void Player::increaseNumOfWonCard(){
+        numOfWonCards++;   //adds the player's card
+    }
+
     void Player::increaseNumOfWinnings(){
         numOfWinnings++;
     }

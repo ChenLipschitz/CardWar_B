@@ -23,6 +23,7 @@ namespace ariel{
         void increaseNumOfWinnings();
         int getNumOfWonCards();
         void increaseNumOfWonCards();
+        void increaseNumOfWonCard();
         bool getIsPlaying();
         void setIsPlaying();
     };

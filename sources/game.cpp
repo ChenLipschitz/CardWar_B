@@ -105,7 +105,8 @@ void Game::playTurn(){
     ///Tie///
     else{
         int numOfTies = 0;
-        ///incase one of the decks were is 0 during the draw////
+
+        ///start loop///
         while(result == 0){
             state = state + ". Draw. ";
             numOfTies++;
@@ -113,11 +114,23 @@ void Game::playTurn(){
                 player1.cardsStack.pop();
                 player2.cardsStack.pop();
             }
+            ///incase one of the decks got empty during the draw///
+            if (player1.stacksize() == 0 || player2.stacksize() == 0){
+                for (int i=0; i<numOfTies; i++){
+                    player1.increaseNumOfWonCard();
+                    player2.increaseNumOfWonCard();
+                    increaseNumOfRounds();
+                }
+                return;
+            }
             result = player1.cardsStack.back().compareTo(player2.cardsStack.back());
             state = state + player1.getName()+" played "+ player1.cardsStack.back().toString() +" "
                 player2.getName()+" played "+player2.cardsStack.back().toString();
         }
+        ///end of loop///
+
         numOfDraws = numOfDraws + numOfTies;
+        ///player1 won the draw///
         if (result == 1){
             for(int i=1; i<=numOfTies; i++){
                 player1.increaseNumOfWonCards();
@@ -127,6 +140,8 @@ void Game::playTurn(){
             gameStatus.push(state+". "+player1.getName()+" wins.");
             player1.increaseNumOfWinnings();
         }
+
+        ///player2 won the draw///
         else{
             for(int i=1; i<=numOfTies; i++){
                 player2.increaseNumOfWonCards();
