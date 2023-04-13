@@ -1,0 +1,15 @@
+failure=false
+for i in {1..500}; do
+  output=$(./test1)
+  if [[ $output == "Status: FAILURE!" ]]; then
+    echo "** FAIL *"
+    failure=true
+    echo "Log for failed test:"
+    echo "$output"
+    break
+  fi
+done
+
+if [[ $failure == false ]]; then
+  echo "* Success **"
+fi

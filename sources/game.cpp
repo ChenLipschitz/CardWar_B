@@ -106,6 +106,7 @@ void Game::playTurn(){
         while(result == 0){
             state = state + ". Draw. ";
             numOfTies++;
+            // in case the deck is empty
             if (player1.stacksize() == 0){
                 for (int i=0; i<numOfTies-1; i++){
                     player1.increaseNumOfWonCards();
@@ -116,6 +117,7 @@ void Game::playTurn(){
                 increaseNumOfRounds();
                 return;
             }
+            // in case only 1 card has left in the deck
             if (player1.stacksize() == 1){
                 player1.playCard();
                 player2.playCard();
@@ -126,6 +128,7 @@ void Game::playTurn(){
                 return;
             }
 
+            //pop cards only if there are more than 2 cards in the deck (for upsid)
             if (player1.stacksize() >= 2 ){
                 player1.playCard();
                 player2.playCard();
