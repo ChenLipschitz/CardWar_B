@@ -13,6 +13,6 @@ namespace ariel{
         int getValue();
         string getShape();
         string toString();
-        int compareTo(Card other);
+        // int compareTo(Card other);
     };
 }

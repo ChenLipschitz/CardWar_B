@@ -85,12 +85,11 @@ void Game::playTurn(){
         throw std::runtime_error("ERROR- Game was over");
     }
 
-    int result = player1.getStack().back().compareTo(player2.getStack().back());
-    string state = player1.getName()+" played "+ player1.getStack().back().toString() +" "+
-                player2.getName()+" played "+player2.getStack().back().toString();
-    player1.getStack().pop_back();
-    player2.getStack().pop_back();
-    cout<<player1.getName()<<endl;
+    Card cardPlayer1= player1.playCard();
+    Card cardPlayer2= player2.playCard();
+    int result = dualTurn(cardPlayer1, cardPlayer2);
+    string state = player1.getName()+" played "+ cardPlayer1.toString() +" "+
+                player2.getName()+" played "+cardPlayer2.toString();
     
     ///player1 wins///
     if (result == 1){
@@ -116,53 +115,78 @@ void Game::playTurn(){
         while(result == 0){
             state = state + ". Draw. ";
             numOfTies++;
-            if (numOfTies > 1){
-                player1.getStack().pop_back();
-                player2.getStack().pop_back();
+            if (player1.stacksize() != 0 || player1.stacksize() !=1 ){
+                player1.playCard();
+                player2.playCard();
             }
             ///incase one of the decks got empty during the draw///
-            if (player1.stacksize() == 0 || player2.stacksize() == 0){
+            if (player1.stacksize() == 0 || player2.stacksize() == 1){
                 for (int i=0; i<numOfTies; i++){
-                    player1.increaseNumOfWonCard();
-                    player2.increaseNumOfWonCard();
+                    player1.increaseNumOfWonCards();
+                    player2.increaseNumOfWonCards();
                     increaseNumOfRounds();
                 }
                 return;
             }
-            result = player1.getStack().back().compareTo(player2.getStack().back());
-            state = state + player1.getName()+" played "+ player1.getStack().back().toString() +" "+
-                player2.getName()+" played "+player2.getStack().back().toString();
+            Card cardPlayer1D= player1.playCard();
+            Card cardPlayer2D= player2.playCard();
+            result = dualTurn(cardPlayer1D, cardPlayer2D);
+            state = state + player1.getName()+" played "+ cardPlayer1D.toString() +" "+
+                player2.getName()+" played "+cardPlayer2D.toString();
         }
         ///end of loop///
 
         numOfDraws = numOfDraws + numOfTies;
         ///player1 won the draw///
         if (result == 1){
+            player1.increaseNumOfWonCards();
             for(int i=1; i<=numOfTies; i++){
-                player1.increaseNumOfWonCards();
+                player1.increaseNumOfWonCardDraw();
                 increaseNumOfRounds();
-                return;
             }
             gameStatus.push_back(state+". "+player1.getName()+" wins.");
             player1.increaseNumOfWinnings();
+            return;
         }
 
         ///player2 won the draw///
-        else{
+        if (result == -1){
+            player2.increaseNumOfWonCards();
             for(int i=1; i<=numOfTies; i++){
-                player2.increaseNumOfWonCards();
+                player2.increaseNumOfWonCardDraw();
                 increaseNumOfRounds();
-                return;
             }
             gameStatus.push_back(state+". "+player2.getName()+" wins.");
             player2.increaseNumOfWinnings();
+            return;
         }
+    }
+}
+
+int Game::dualTurn(Card card1, Card card2){
+    if (card1.getValue() == card2.getValue()){ 
+        return 0;
+    }
+    if (card1.getValue() == 1 && card2.getValue() != 2){    //Ace agaist 3-13-> Ace wins
+        return 1;
+    }
+    if (card1.getValue() != 2 && card2.getValue() == 1){     //Ace against 3-13-> Ace wins
+        return -1;
+    }
+    if(card1.getValue() > card2.getValue()){    
+        return 1;
+    }
+    if (card1.getValue() < card2.getValue()){
+        return -1;
+    }
+    else{
+        throw std::runtime_error("ERROR- cannot compare cards");
     }
 }
 
 
 void Game::playAll(){
-    while(player1.getStack().size() > 0 && player2.getStack().size() > 0){
+    while(player1.stacksize() > 0 && player2.stacksize() > 0){
         playTurn();
     }
 }

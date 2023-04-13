@@ -8,7 +8,7 @@ using namespace std;
 namespace ariel{
     class Player{
         private:
-        string name;
+        std::string name;
         vector<Card> cardsStack;   //the player's stack
         int numOfWonCards = 0;
         int numOfWinnings = 0;
@@ -20,15 +20,15 @@ namespace ariel{
         Player(string name);
         int stacksize();    //the amout of cards that left
         int cardesTaken();  //the amount of cards the player has won
-        string getName();
+        std::string getName()const;
         int getNumOfWinnings();
         void increaseNumOfWinnings();
         int getNumOfWonCards();
         void increaseNumOfWonCards();
-        void increaseNumOfWonCard();
+        void increaseNumOfWonCardDraw();
         bool getIsPlaying();
         void setIsPlaying();
-        void addCardToStack(Card c);
-        vector<Card> getStack();
+        void addCardToStack(Card card);
+        Card playCard();
     };
 }

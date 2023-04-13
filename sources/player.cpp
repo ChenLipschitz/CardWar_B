@@ -1,16 +1,17 @@
 #include "player.hpp"
-#include "string"
+#include <string>
 #include <exception>
 #include <vector>
 
+using namespace std;
 using namespace ariel;
 
     Player::Player(){
-        string name = "so-and-so";
+        this->name = "so-and-so";
     }
     
     Player::Player(string name_){
-        string name=name_;
+        this->name=name_;
     }
 
     int Player::stacksize(){
@@ -28,7 +29,7 @@ using namespace ariel;
         return this->numOfWonCards;
     }
 
-    string Player::getName(){
+    std::string Player::getName()const{
         return this->name;
     }
 
@@ -36,8 +37,8 @@ using namespace ariel;
         numOfWonCards+=2;   //adds the player's card and his opponent
     }
 
-    void Player::increaseNumOfWonCard(){
-        numOfWonCards++;   //adds the player's card
+    void Player::increaseNumOfWonCardDraw(){
+        numOfWonCards+=4;   
     }
 
     void Player::increaseNumOfWinnings(){
@@ -57,13 +58,19 @@ using namespace ariel;
         }
     }
     
-    void Player::addCardToStack(Card c){
-        this->cardsStack.push_back(c);
+    void Player::addCardToStack(Card card){
+        this->cardsStack.push_back(card);
     }
 
-    vector<Card> Player::getStack(){
-        return this->cardsStack;
+    Card Player::playCard(){
+        Card temp = cardsStack.back();
+        cardsStack.pop_back();
+        return temp;
     }
+
+    // vector<Card> Player::getStack(){
+    //     return this->cardsStack;
+    // }
 
     int Player::getNumOfWinnings(){
         return this->numOfWinnings;

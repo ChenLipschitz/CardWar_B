@@ -9,7 +9,7 @@ namespace ariel{
         Player &player1;
         Player &player2;
         string winnersName;
-        int numOfDraws;
+        int numOfDraws = 0;
         vector<string> gameStatus;
         int numOfRounds = 0;
         void handOutCards();
@@ -26,5 +26,6 @@ namespace ariel{
         int getNumOfDraws();
         int getNumOfRounds();
         void increaseNumOfRounds();
+        int dualTurn(Card card1, Card card2);
     };
 }
