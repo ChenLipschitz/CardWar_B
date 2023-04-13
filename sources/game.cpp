@@ -117,7 +117,7 @@ void Game::playTurn(){
                 increaseNumOfRounds();
                 return;
             }
-            // in case only 1 card has left in the deck
+            // in case only 1 card has left in the deck- the upside down card
             if (player1.stacksize() == 1){
                 player1.playCard();
                 player2.playCard();
@@ -128,7 +128,7 @@ void Game::playTurn(){
                 return;
             }
 
-            //pop cards only if there are more than 2 cards in the deck (for upsid)
+            //pop cards only if there are more than 2 cards in the deck (for upside down card and open card)
             if (player1.stacksize() >= 2 ){
                 player1.playCard();
                 player2.playCard();
