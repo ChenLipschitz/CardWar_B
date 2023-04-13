@@ -106,18 +106,29 @@ void Game::playTurn(){
         while(result == 0){
             state = state + ". Draw. ";
             numOfTies++;
-            if (player1.stacksize() != 0 || player1.stacksize() !=1 ){
+            if (player1.stacksize() == 0){
+                for (int i=0; i<numOfTies-1; i++){
+                    player1.increaseNumOfWonCards();
+                    player2.increaseNumOfWonCards();
+                }
+                player1.addCardWon();
+                player2.addCardWon();
+                increaseNumOfRounds();
+                return;
+            }
+            if (player1.stacksize() == 1){
                 player1.playCard();
                 player2.playCard();
-            }
-            ///incase one of the decks got empty during the draw///
-            if (player1.stacksize() == 0 || player2.stacksize() == 1){
                 for (int i=0; i<numOfTies; i++){
                     player1.increaseNumOfWonCards();
                     player2.increaseNumOfWonCards();
-                    increaseNumOfRounds();
                 }
                 return;
+            }
+
+            if (player1.stacksize() >= 2 ){
+                player1.playCard();
+                player2.playCard();
             }
             Card cardPlayer1D= player1.playCard();
             Card cardPlayer2D= player2.playCard();

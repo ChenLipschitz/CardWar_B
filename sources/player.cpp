@@ -75,3 +75,7 @@ using namespace ariel;
     int Player::getNumOfWinnings(){
         return this->numOfWinnings;
     }
+
+    void Player::addCardWon(){
+        this->numOfWonCards++;
+    }

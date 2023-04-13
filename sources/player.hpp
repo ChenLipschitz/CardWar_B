@@ -28,6 +28,7 @@ namespace ariel{
         void increaseNumOfWonCardDraw();
         bool getIsPlaying();
         void setIsPlaying();
+        void addCardWon();
         void addCardToStack(Card card);
         Card playCard();
     };
