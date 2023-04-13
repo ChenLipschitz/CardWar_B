@@ -7,22 +7,20 @@ using namespace ariel;
 
     Player::Player(){
         string name = "so-and-so";
-    };
+    }
+    
     Player::Player(string name_){
         string name=name_;
     }
 
     int Player::stacksize(){
         //the amount of cards that had left to the player
-        try{
-            if (this->cardsStack == NULL){
-                return 0;
-            }
-            if (cardsStack.size()<=52 && cardsStack.size()>=0){
-                return this->cardsStack.size();
-            }   
+        if (cardsStack.size()<=52 && cardsStack.size()>=0){
+            return this->cardsStack.size();
         }
-        catch().........
+        else{
+            throw std::runtime_error("ERROR- cannot get the stack size");
+        }   
     }
 
     int Player::cardesTaken(){
@@ -59,3 +57,14 @@ using namespace ariel;
         }
     }
     
+    void Player::addCardToStack(Card c){
+        this->cardsStack.push_back(c);
+    }
+
+    vector<Card> Player::getStack(){
+        return this->cardsStack;
+    }
+
+    int Player::getNumOfWinnings(){
+        return this->numOfWinnings;
+    }

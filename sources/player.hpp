@@ -1,13 +1,15 @@
 #pragma once
 #include <string>
 #include <iostream>
+#include <vector>
+#include "card.hpp"
 using namespace std;
 
 namespace ariel{
     class Player{
         private:
         string name;
-        vector<Cards> cardsStack;   //the player's stack
+        vector<Card> cardsStack;   //the player's stack
         int numOfWonCards = 0;
         int numOfWinnings = 0;
         bool isPlaying = false;
@@ -26,5 +28,7 @@ namespace ariel{
         void increaseNumOfWonCard();
         bool getIsPlaying();
         void setIsPlaying();
+        void addCardToStack(Card c);
+        vector<Card> getStack();
     };
 }

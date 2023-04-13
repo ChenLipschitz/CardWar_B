@@ -29,7 +29,7 @@ int Card::compareTo(Card other){
     if(this->value > other.getValue()){    
         return 1;
     }
-    if (this->value < other,getValue()){
+    if (this->value < other.getValue()){
         return -1;
     }
     return 0;

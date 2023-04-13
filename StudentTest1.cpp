@@ -4,6 +4,7 @@
 #include "sources/game.hpp"
 #include "sources/card.hpp"
 using namespace std;
+using namespace ariel;
 
 TEST_CASE("The amount of cards before starting a game")
 {
@@ -35,6 +36,7 @@ TEST_CASE("The card scheme at the end of the game")
     Game game(p1, p2);
     game.playAll();
     int sum = p1.stacksize() + p1.cardesTaken() + p2.stacksize() + p2.cardesTaken();
+    cout<<p1.stacksize() <<"  "<<p1.cardesTaken() <<"  "<< p2.stacksize() <<"  "<<p2.cardesTaken()<<endl;
     CHECK(sum == 52);
 }
 
