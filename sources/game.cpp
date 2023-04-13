@@ -53,19 +53,10 @@ void Game::handOutCards(){
         player2.addCardToStack(deck[i]);
 
     }
-    // for (int i=1; i<=52; i++){
-    //     Card tempCard = deck.back();
-    //     deck.pop();
-    //     if (i%2 == 1){
-    //         player1.cardsStack.push(tempCard);
-    //     }
-    //     else{
-    //         player2.cardsStack.push(tempCard);
-    //     }
-    // }
+    
 }
 
-///used....
+///used GeeksForGeeks
 void Game::shuffleCards(vector<Card> &deck){
     random_device rd;
     mt19937 g(rd());
@@ -81,7 +72,7 @@ void Game::playTurn(){
     if (&player1 == &player2){
         throw std::invalid_argument("ERROR- A player cannot play against himself");
     }
-    if (player1.stacksize() == 0 || player2.stacksize() == 0){
+    if (player1.cardesTaken() + player2.cardesTaken() == 52){
         throw std::runtime_error("ERROR- Game was over");
     }
 
@@ -186,6 +177,9 @@ int Game::dualTurn(Card card1, Card card2){
 
 
 void Game::playAll(){
+    if (player1.stacksize() == 0 && player2.stacksize() == 0){
+        throw std::runtime_error("ERROR- the deck is empty");
+    }
     while(player1.stacksize() > 0 && player2.stacksize() > 0){
         playTurn();
     }
@@ -222,10 +216,10 @@ void Game::printLog(){
 
 void Game::printWiner(){
     if (player1.cardesTaken() > player2.cardesTaken()){
-        cout << player1.getName() <<endl;
+        cout << player1.getName()<< " Won!!!" <<endl;
     }
     if (player1.cardesTaken() < player2.cardesTaken()){
-        cout << player2.getName() <<endl;
+        cout << player2.getName() << " Won!!!" <<endl;
     }
     if (player1.cardesTaken() == player2.cardesTaken()){
         cout << "It's a tie" << endl;
