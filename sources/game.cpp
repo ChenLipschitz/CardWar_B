@@ -13,11 +13,7 @@
 using namespace std;
 using namespace ariel;
 
-Game::Game(Player &player1_, Player &player2_): player1(player1_), player2(player2_){
-    //if (player1_.getIsPlaying() || player2_.getIsPlaying){
-      //  throw ("A player can play only one game");
-    //}
-    
+Game::Game(Player &player1_, Player &player2_): player1(player1_), player2(player2_){    
     player1.setIsPlaying();
     player2.setIsPlaying();
     handOutCards();

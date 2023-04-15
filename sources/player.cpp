@@ -68,10 +68,6 @@ using namespace ariel;
         return temp;
     }
 
-    // vector<Card> Player::getStack(){
-    //     return this->cardsStack;
-    // }
-
     int Player::getNumOfWinnings(){
         return this->numOfWinnings;
     }
